@@ -18,7 +18,6 @@ namespace SebaApp.Models
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string LastName { get; set; }
-
         [Required]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public string Email { get; set; }
@@ -30,9 +29,19 @@ namespace SebaApp.Models
 
         public int Status { get; set; }
 
-        [Column(TypeName = "date")]
-        [DataType(DataType.Date)]
-        public DateTime created { get; set; }
+        private DateTime? createdDate;
+        public DateTime CreatedDate
+        {
+            get
+            {
+                if (createdDate == null)
+                {
+                    createdDate = DateTime.Now;
+                }
+                return createdDate.Value;
+            }
+            private set { createdDate = value; }
+        }
 
         public virtual DoctorInformation DoctorInformation { get; set; }
         public virtual List<DoctorImage> DoctorImages { get; set; }

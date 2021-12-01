@@ -33,8 +33,20 @@ namespace SebaApp.Models
 
         [Column(TypeName = "date")]
         [DataType(DataType.Date)]
-        public DateTime created { get; set; }
 
+        private DateTime? createdDate;
+        public DateTime CreatedDate
+        {
+            get
+            {
+                if (createdDate == null)
+                {
+                    createdDate = DateTime.Now;
+                }
+                return createdDate.Value;
+            }
+            private set { createdDate = value; }
+        }
         public virtual PatientInformation PatientInformation { get; set; }
         public virtual AccountBalance AccountBalance { get; set; }
         public virtual List<Appointment> Appointments { get; set; }
