@@ -12,7 +12,6 @@ namespace SebaApp.Models
         public int ScheduleID { get; set; }
         public string SetDay { get; set; }
         public string SetTime { get; set; }
-
         public int doctorID { get; set; }
         public virtual Doctor Doctor { get; set; }
 

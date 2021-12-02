@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    IEnumerable<DoctorInformation> getInfo = ViewBag.info;
 }
 
 <div class="row gutters-sm">
@@ -14,7 +16,7 @@
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                         <h4>@Model.FirstName @Model.LastName</h4>
-                        <p class="text-secondary mb-1">Full Stack Developer</p>
+                        <p class="text-secondary mb-1">@ViewBag.SpecialistIn</p>
                         <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
 
                         @if (Model.Status == 1)
@@ -25,7 +27,7 @@
                         {
                             <button type="button" class="btn btn-outline-danger ">Deactive</button>
                         }
-                        
+
                         <button class="btn btn-outline-primary">Message</button>
                     </div>
                 </div>
@@ -87,7 +89,7 @@
                         <h6 class="mb-0">Doctor Card Number</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                       
+
                     </div>
                 </div>
                 <hr>
@@ -96,7 +98,7 @@
                         <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        
+                        @ViewBag.officeAddress
                     </div>
                 </div>
                 <hr>
@@ -109,19 +111,27 @@
         </div>
 
         <div class="row gutters-sm">
-            <div class="col-sm-6 mb-3">
+            <div class="col-md-6 mb-3">
                 <div class="card h-100">
                     <div class="card-body">
 
-                        <h6 class="d-flex align-items-center mb-3">
-                            <i class="material-icons text-info mr-2">Personal</i>Impormation
-                            <button type="button" class="btn btn-primary btn-style" data-toggle="modal"
-                                    data-target="#exampleModalCenter">
-                                Launch demo
-                            </button>
+                        <h6 class="d-flex align-items-center mb-3 justify-content-between">
+                            <i class="material-icons text-info mr-2">Personal Imformation</i>
+                            @if (ViewBag.infocount == 0)
+                            {
+                                <button type="button" class="btn btn-primary btn-style " data-toggle="modal"
+                                        data-target="#exampleModalCenter">
+                                    Launch demo
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-outline-success ">Edit</button>
+                            }
+
+
                         </h6>
                         <!-- Button trigger modal -->
-  
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -133,7 +143,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="#" method="post">
+                                    <form asp-action="DoctorInformation">
                                         <div class="modal-body">
                                             <!-- forms 2 -->
                                             <div class="card card_border py-2 mb-4">
@@ -141,96 +151,93 @@
 
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
-                                                            <label for="inputState" class="input__label">State</label>
-                                                            <select id="inputState" class="form-control input-style">
+                                                            <label for="SpecialistIn" class="input__label">SpecialistIn</label>
+                                                            <select id="SpecialistIn" class="form-control input-style" name="SpecialistIn">
                                                                 <option selected>Choose...</option>
-                                                                <option>dentis </option>
-                                                                <option>Anesthesiology </option>
-                                                                <option>Surgery</option>
-                                                                <option>Diagnostic radiology</option>
-                                                                <option>Nuclear medicine</option>
-                                                                <option>Neurology</option>
-                                                                <option>Ophthalmology</option>
-                                                                <option>Urology</option>
-                                                                <option>Psychiatry</option>
-                                                                <option>Allergy and immunology</option>
-                                                                <option>Emergency medicine</option>
-                                                                <option>Medical genetics</option>
+                                                                <option value="dentis">dentis </option>
+                                                                <option value="Anesthesiology">Anesthesiology </option>
+                                                                <option value="Surgery">Surgery</option>
+                                                                <option value="Diagnostic Radiology">Diagnostic radiology</option>
+                                                                <option value="Nuclear medicine">Nuclear medicine</option>
+                                                                <option value="Neurology">Neurology</option>
+                                                                <option value="Ophthalmology">Ophthalmology</option>
+                                                                <option value="Urology">Urology</option>
+                                                                <option value="Psychiatry">Psychiatry</option>
+                                                                <option value="Allergy and immunology">Allergy and immunology</option>
+                                                                <option value="Emergency medicine">Emergency medicine</option>
+                                                                <option value="Medical genetics">Medical genetics</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <label for="inputPassword4" class="input__label">Experiance</label>
-                                                            <input type="text" class="form-control input-style" id=""
+                                                            <label for="Experiance" class="input__label">Experiance</label>
+                                                            <input type="text" name="Experiance" class="form-control input-style" id="Experiance"
                                                                    placeholder="Experiance">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="exampleFormControlTextarea1" class="form-label">About</label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                        <label for="About" class="form-label">About</label>
+                                                        <textarea class="form-control" id="About" name="About" rows="3"></textarea>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="hospital" class="input__label">Hospital</label>
-                                                        <input type="text" class="form-control input-style" id="Hospital"
+                                                        <label for="Hospital" class="input__label">Hospital</label>
+                                                        <input type="text" class="form-control input-style" id="Hospital" name="Hospital"
                                                                placeholder="Hospital Name">
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="inputAddress" class="input__label">OfficeAddress</label>
-                                                        <input type="text" class="form-control input-style" id="inputAddress"
+                                                        <label for="OfficeAddress" class="input__label">OfficeAddress</label>
+                                                        <input type="text" class="form-control input-style" id="OfficeAddress" name="OfficeAddress"
                                                                placeholder="1234 Main St">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inputAddress2" class="input__label">MailingAddress</label>
-                                                        <input type="text" class="form-control input-style" id="inputAddress2"
+                                                        <label for="MailingAddress" class="input__label">MailingAddress</label>
+                                                        <input type="text" class="form-control input-style" id="MailingAddress" name="MailingAddress"
                                                                placeholder="Apartment, studio, or floor">
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="form-group col-md-4">
-                                                            <label for="inputCity" class="input__label">Country</label>
-                                                            <input type="text" class="form-control input-style" id="inputCity">
+                                                            <label for="Country" class="input__label">Country</label>
+                                                            <input type="text" class="form-control input-style" id="Country" name="Country">
                                                         </div>
                                                         <div class="form-group col-md-4">
-                                                            <label for="inputState" class="input__label">State</label>
-                                                            <select id="inputState" class="form-control input-style">
-                                                                <option selected>Choose...</option>
-                                                                <option>...</option>
-                                                            </select>
+                                                            <label for="State" class="input__label">State</label>
+                                                            <input type="text" class="form-control input-style" id="State" name="State">
                                                         </div>
                                                         <div class="form-group col-md-4">
-                                                            <label for="inputZip" class="input__label">City</label>
-                                                            <input type="text" class="form-control input-style" id="inputZip">
+                                                            <label for="City" class="input__label">City</label>
+                                                            <input type="text" class="form-control input-style" id="City" name="City">
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="form-group col-md-4">
-                                                            <label for="inputCity" class="input__label">Area</label>
-                                                            <input type="text" class="form-control input-style" id="inputCity">
+                                                            <label for="Area" class="input__label">Area</label>
+                                                            <input type="text" class="form-control input-style" id="Area" name="Area">
                                                         </div>
                                                         <div class="form-group col-md-4">
-                                                            <label for="inputState" class="input__label">Birth Date</label>
-                                                            <input type="Date" class="form-control input-style">
+                                                            <label for="dateofbirth" class="input__label">Birth Date</label>
+                                                            <input type="Date" name="dateofbirth" id="dateofbirth" class="form-control input-style">
                                                         </div>
                                                         <div class="form-group col-md-4">
-                                                            <label for="inputZip" class="input__label">Gender</label>
-                                                            <select id="inputState" class="form-control input-style">
+                                                            <label for="Gender" class="input__label">Gender</label>
+                                                            <select id="Gender" name="Gender" class="form-control input-style">
                                                                 <option selected>Choose...</option>
-                                                                <option>Male</option>
-                                                                <option>Female</option>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
-                                                            <label for="inputCity" class="input__label">NID</label>
-                                                            <input type="text" class="form-control input-style" id="inputCity">
+                                                            <label for="Nid" class="input__label">NID</label>
+                                                            <input type="text" name="Nid" class="form-control input-style" id="Nid">
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <label for="inputZip" class="input__label">Nationality</label>
-                                                            <input type="text" class="form-control input-style" id="inputZip">
+                                                            <label for="Nationality" class="input__label">Nationality</label>
+                                                            <input type="text" name="Nationality" class="form-control input-style" id="Nationality">
                                                         </div>
                                                     </div>
-
+                                                    <input type="text" value="@Model.doctorID" name="doctorID" id="doctorID">
 
                                                 </div>
                                             </div>
@@ -238,20 +245,179 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success">Save changes</button>
+                                            <div class="form-group">
+                                                <input type="submit" value="Create" class="btn btn-primary" />
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Modal End-->
+                        <!--Show Information-->
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Experiance</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.Experiance Years
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">About</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.About
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Hospital</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.Hospital
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">officeAddress</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.officeAddress
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">MailingAddress</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.MailingAddress
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Country</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.Country
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">State</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.State
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">City</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.City
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Area</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.Area
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">DateofBirth</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.DateofBirth
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Gender</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.Gender
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nid</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.Nid
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nationality</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @ViewBag.Nationality
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!--Schedule Section -->
             <div class="col-sm-6 mb-3">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
+                        <h6 class="d-flex align-items-center mb-3 justify-content-between">
+                            <i class="material-icons text-info mr-2">Schedule</i>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary btn-style" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                Set Schedule
+                            </button>
+                        </h6>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Manage Schedule</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form asp-action="CreateSchedule">
+                                        <div class="modal-body">
+
+                                            <div class="form-group">
+                                                <label for="SetDay" class="input__label">Day</label>
+                                                <select id="SetDay" class="form-control input-style" name="SetDay">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">Friday</option>
+                                                    <option value="2">Saturday</option>
+                                                    <option value="3">Sunday</option>
+                                                    <option value="4">Monday</option>
+                                                    <option value="5">Tuesday</option>
+                                                    <option value="6">Wednesday</option>
+                                                    <option value="7">Thursday</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="time" id="SetTime" name="SetTime" class="form-control input-style">
+                                            </div>
+                                            <input type="text" value="@Model.doctorID" name="doctorID" id="doctorID" hidden >
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            <div class="form-group">
+                                                <input type="submit" value="Submit" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <small>Web Design</small>
                         <div class="progress mb-3" style="height: 5px">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -279,9 +445,9 @@
 
 
 
+        </div>
     </div>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.doctorID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.doctorID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
