@@ -103,9 +103,9 @@ namespace SebaApp.Controllers
             //getting Doctor Information
             var doctorinformation = await _context.DoctorInformation.FirstOrDefaultAsync(i => i.doctorID == id);
             //getting Doctor Schedules
-            var doctorschedule = await _context.Schedules.FirstOrDefaultAsync(i => i.doctorID == id);
+            var doctorschedule = await _context.Schedules.Where(i => i.doctorID == id).ToListAsync();
 
-            ViewBag.infocount = _context.DoctorInformation.Count();
+            ViewBag.infocount = _context.DoctorInformation.Where(i => i.doctorID == id).Count();
 
 
             Doctor ViewProfileDetails = new Doctor();
@@ -118,27 +118,44 @@ namespace SebaApp.Controllers
             ViewProfileDetails.mobile = DoctorProfileData.mobile;
             ViewProfileDetails.Status = DoctorProfileData.Status;
 
-            //Doctor personal Information
-            ViewBag.SpecialistIn = doctorinformation.SpecialistIn;
-            ViewBag.Experiance = doctorinformation.Experiance;
-            ViewBag.About = doctorinformation.About;
-            ViewBag.Hospital = doctorinformation.Hospital;
-            ViewBag.officeAddress = doctorinformation.officeAddress;
-            ViewBag.MailingAddress = doctorinformation.MailingAddress;
-            ViewBag.Country = doctorinformation.Country;
-            ViewBag.State = doctorinformation.State;
-            ViewBag.City = doctorinformation.City;
-            ViewBag.Area = doctorinformation.Area;
-            ViewBag.DateofBirth = doctorinformation.DateofBirth;
-            ViewBag.Gender = doctorinformation.Gender;
-            ViewBag.Nid = doctorinformation.Nid;
-            ViewBag.Nationality = doctorinformation.Nationality;
-            ViewBag.doctorID = doctorinformation.doctorID;
+            
 
-            //Doctor Show Schedule
+            if (doctorinformation == null) {
+               
+            } else
+            {
+                //Doctor personal Information
+                ViewBag.SpecialistIn = doctorinformation.SpecialistIn;
+                ViewBag.Experiance = doctorinformation.Experiance;
+                ViewBag.About = doctorinformation.About;
+                ViewBag.Hospital = doctorinformation.Hospital;
+                ViewBag.officeAddress = doctorinformation.officeAddress;
+                ViewBag.MailingAddress = doctorinformation.MailingAddress;
+                ViewBag.Country = doctorinformation.Country;
+                ViewBag.State = doctorinformation.State;
+                ViewBag.City = doctorinformation.City;
+                ViewBag.Area = doctorinformation.Area;
+                ViewBag.DateofBirth = doctorinformation.DateofBirth;
+                ViewBag.Gender = doctorinformation.Gender;
+                ViewBag.Nid = doctorinformation.Nid;
+                ViewBag.Nationality = doctorinformation.Nationality;
+                ViewBag.doctorID = doctorinformation.doctorID;
+            }
 
+            //Getting Schedule List
+            if (doctorschedule == null)
+            {
+                
+            }
+            else
+            {
+                //Doctor Show Schedule
+                ViewData["Schdule"] = doctorschedule;
+            }
 
             return View(ViewProfileDetails);
+
+
         }
 
         //Create Information
@@ -171,6 +188,38 @@ namespace SebaApp.Controllers
             return RedirectToAction("Profile", "Doctor", new { @id = doctorInformation.doctorID });
         }
 
+      
+        public async Task<IActionResult> EditInformation(int? id)
+        {
+            if (id == null || id <= 0)
+            {
+                return BadRequest();
+            }
+            var info = await _context.DoctorInformation.FirstOrDefaultAsync(e => e.doctorID == id);
+            if (info == null)
+            {
+                return NotFound();
+            }
+
+            return View(info);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditInformation(DoctorInformation editInformation)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editInformation);
+            }
+
+            _context.DoctorInformation.Update(editInformation);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Profile", "Doctor", new { @id = editInformation.doctorID });
+        }
+
+
+        //Add Schedule
         [HttpPost]
         public IActionResult CreateSchedule(Schedule schedule)
         {

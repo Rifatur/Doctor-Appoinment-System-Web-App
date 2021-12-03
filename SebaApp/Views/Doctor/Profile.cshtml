@@ -121,12 +121,15 @@
                             {
                                 <button type="button" class="btn btn-primary btn-style " data-toggle="modal"
                                         data-target="#exampleModalCenter">
-                                    Launch demo
+                                    set information
                                 </button>
+
                             }
                             else
                             {
-                                <button type="button" class="btn btn-outline-success ">Edit</button>
+
+                                <a class="btn btn-outline-info " asp-action="EditInformation"  asp-route-id="@Model.doctorID">Edit</a>
+
                             }
 
 
@@ -255,111 +258,246 @@
                         </div>
 
                         <!-- Modal End-->
-                        <!--Show Information-->
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Experiance</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.Experiance Years
+                        <!-- Modal -->
+                        <div class="modal fade" id="EditInfoModalCenter" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form asp-action="DoctorInformation">
+                                        <div class="modal-body">
+                                            <!-- forms 2 -->
+                                            <div class="card card_border py-2 mb-4">
+                                                <div class="card-body">
+
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="SpecialistIn" class="input__label">SpecialistIn</label>
+                                                            <select id="SpecialistIn" class="form-control input-style" name="SpecialistIn" >
+                                                                <option value="@ViewBag.SpecialistIn">@ViewBag.SpecialistIn</option>
+                                                                <option value="dentis">dentis </option>
+                                                                <option value="Anesthesiology">Anesthesiology </option>
+                                                                <option value="Surgery">Surgery</option>
+                                                                <option value="Diagnostic Radiology">Diagnostic radiology</option>
+                                                                <option value="Nuclear medicine">Nuclear medicine</option>
+                                                                <option value="Neurology">Neurology</option>
+                                                                <option value="Ophthalmology">Ophthalmology</option>
+                                                                <option value="Urology">Urology</option>
+                                                                <option value="Psychiatry">Psychiatry</option>
+                                                                <option value="Allergy and immunology">Allergy and immunology</option>
+                                                                <option value="Emergency medicine">Emergency medicine</option>
+                                                                <option value="Medical genetics">Medical genetics</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="Experiance" class="input__label">Experiance</label>
+                                                            <input type="text" name="Experiance" class="form-control input-style" id="Experiance"
+                                                                   value="@ViewBag.Experiance">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="About" class="form-label">About</label>
+                                                        <textarea class="form-control" id="About" name="About" rows="3">@ViewBag.About</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Hospital" class="input__label">Hospital</label>
+                                                        <input type="text" class="form-control input-style" id="Hospital" name="Hospital"
+                                                               value="@ViewBag.Hospital">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="OfficeAddress" class="input__label">OfficeAddress</label>
+                                                        <input type="text" class="form-control input-style" id="OfficeAddress" name="OfficeAddress"
+                                                              value="@ViewBag.officeAddress">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="MailingAddress" class="input__label">MailingAddress</label>
+                                                        <input type="text" class="form-control input-style" id="MailingAddress" name="MailingAddress"
+                                                               value="@ViewBag.MailingAddress">
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="Country" class="input__label">Country</label>
+                                                            <input type="text" class="form-control input-style" id="Country" name="Country" value="@ViewBag.Country">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="State" class="input__label">State</label>
+                                                            <input type="text" class="form-control input-style" id="State" name="State" value="@ViewBag.State">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="City" class="input__label">City</label>
+                                                            <input type="text" class="form-control input-style" id="City" name="City" value="@ViewBag.City">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="Area" class="input__label">Area</label>
+                                                            <input type="text" class="form-control input-style" id="Area" name="Area" value="@ViewBag.Area">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="dateofbirth" class="input__label">Birth Date</label>
+                                                            <input type="Date" name="dateofbirth" id="dateofbirth" class="form-control input-style" value="@ViewBag.dateofbirth">
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="Gender" class="input__label">Gender</label>
+                                                            <select id="Gender" name="Gender" class="form-control input-style">
+                                                                <option value="@ViewBag.Gender">@ViewBag.Gender</option>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="Nid" class="input__label">NID</label>
+                                                            <input type="text" name="Nid" class="form-control input-style" id="Nid" value="@ViewBag.Nid">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="Nationality" class="input__label">Nationality</label>
+                                                            <input type="text" name="Nationality" class="form-control input-style" id="Nationality" value="@ViewBag.Nationality">
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" value="@Model.doctorID" name="doctorID" id="doctorID" hidden>
+
+                                                </div>
+                                            </div>
+                                            <!-- //forms 2 -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            <div class="form-group">
+                                                <input type="submit" value="Create" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">About</h6>
+
+                        <!-- Modal End-->
+
+
+
+                        @if (ViewBag.infocount > 0)
+                        {
+                            <!--Show Information-->
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Experiance</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.Experiance Years
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.About
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">About</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.About
+                                </div>
                             </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Hospital</h6>
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Hospital</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.Hospital
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.Hospital
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">officeAddress</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.officeAddress
+                                </div>
                             </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">officeAddress</h6>
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">MailingAddress</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.MailingAddress
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.officeAddress
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Country</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.Country
+                                </div>
                             </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">MailingAddress</h6>
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">State</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.State
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.MailingAddress
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">City</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.City
+                                </div>
                             </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Country</h6>
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Area</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.Area
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.Country
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">DateofBirth</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.DateofBirth
+                                </div>
                             </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">State</h6>
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Gender</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.Gender
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.State
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Nid</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.Nid
+                                </div>
                             </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">City</h6>
+                            <div class="row p-2">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Nationality</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @ViewBag.Nationality
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.City
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Area</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.Area
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">DateofBirth</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.DateofBirth
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Gender</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.Gender
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Nid</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.Nid
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Nationality</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                @ViewBag.Nationality
-                            </div>
-                        </div>
+
+                        }
+                        else
+                        {
+
+                        }
+
                     </div>
                 </div>
             </div>
@@ -406,7 +544,7 @@
                                             <div class="form-group">
                                                 <input type="time" id="SetTime" name="SetTime" class="form-control input-style">
                                             </div>
-                                            <input type="text" value="@Model.doctorID" name="doctorID" id="doctorID" hidden >
+                                            <input type="text" value="@Model.doctorID" name="doctorID" id="doctorID" hidden>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -417,30 +555,63 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
-                        <small>Web Design</small>
-                        <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <small>Website Markup</small>
-                        <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <small>One Page</small>
-                        <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <small>Mobile Template</small>
-                        <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <small>Backend API</small>
-                        <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                        </div><!-- Modal End-->
+
+                            <div class="container mt-4">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <!--Table-->
+                                        <table class="table table-hover">
+                                            <!--Table head-->
+                                            <thead class="mdb-color darken-3">
+                                                <tr class="text-black-50">
+                                                    <th>#</th>
+                                                    <th>Day</th>
+                                                    <th>Times</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <!--Table head-->
+                                            <!--Table body-->
+                                            @{ int num = 0;
+                                            }
+                                            @if (ViewData["Schdule"] == null)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <tbody>
+                                                    @foreach (var std in ViewData["Schdule"] as IList<Schedule>)
+                                                    {
+                                                        num = num + 1;
+                                                        <tr>
+                                                            <th scope="row">@num</th>
+                                                            <td>@std.SetDay</td>
+                                                            <td>@std.SetTime</td>
+                                                            <td>
+                                                                @Html.ActionLink("Edit", "Edit", "Schedule", new { id = @std.ScheduleID }, new { }) |
+                                                                @Html.ActionLink("Delete", "Delete", "Schedule", new { id = @std.ScheduleID }, new { })
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            }
+
+                                            <!--Table body-->
+                                        </table>
+                                        <!--Table-->
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--MDB Tables-->
+                        
                     </div>
                 </div>
             </div>
+
+
         </div>
 
 

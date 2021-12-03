@@ -150,3 +150,5 @@ C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Patient
 C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Doctor\Index.cshtml.g.cs
 C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Doctor\Edit.cshtml.g.cs
 C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Doctor\Create.cshtml.g.cs
+C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Doctor\EditInformation.cshtml.g.cs
+C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Schedule\Edit.cshtml.g.cs

@@ -1,0 +1,122 @@
+﻿@model SebaApp.Models.DoctorInformation
+
+@{
+    ViewData["Title"] = "EditInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EditInformation</h1>
+
+<h4>DoctorInformation</h4>
+<hr />
+<div class="card card_border py-2 mb-4">
+    <div class="card-body">
+        <form asp-action="EditInformation">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="infoID" />
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="SpecialistIn" class="input__label">SpecialistIn</label>
+                    <select asp-for="SpecialistIn" class="form-control input-style">
+
+                        <option value="dentis">dentis </option>
+                        <option value="Anesthesiology">Anesthesiology </option>
+                        <option value="Surgery">Surgery</option>
+                        <option value="Diagnostic Radiology">Diagnostic radiology</option>
+                        <option value="Nuclear medicine">Nuclear medicine</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Ophthalmology">Ophthalmology</option>
+                        <option value="Urology">Urology</option>
+                        <option value="Psychiatry">Psychiatry</option>
+                        <option value="Allergy and immunology">Allergy and immunology</option>
+                        <option value="Emergency medicine">Emergency medicine</option>
+                        <option value="Medical genetics">Medical genetics</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Experiance" class="input__label">Experiance</label>
+                    <input asp-for="Experiance" class="form-control input-style">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="About" class="form-label">About</label>
+                <textarea class="form-control" id="About" asp-for="About" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Hospital" class="input__label">Hospital</label>
+                <input type="text" class="form-control input-style" asp-for="Hospital">
+            </div>
+
+            <div class="form-group">
+                <label for="OfficeAddress" class="input__label">OfficeAddress</label>
+                <input type="text" class="form-control input-style" asp-for="officeAddress">
+            </div>
+            <div class="form-group">
+                <label for="MailingAddress" class="input__label">MailingAddress</label>
+                <input type="text" class="form-control input-style" asp-for="MailingAddress">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="Country" class="input__label">Country</label>
+                    <input type="text" class="form-control input-style" asp-for="Country">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="State" class="input__label">State</label>
+                    <input type="text" class="form-control input-style" asp-for="State">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="City" class="input__label">City</label>
+                    <input type="text" class="form-control input-style" asp-for="City">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="Area" class="input__label">Area</label>
+                    <input type="text" class="form-control input-style" asp-for="Area">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dateofbirth" class="input__label">Birth Date</label>
+                    <input type="Date" asp-for="DateofBirth" class="form-control input-style">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="Gender" class="input__label">Gender</label>
+                    <select asp-for="Gender" class="form-control input-style">
+
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Nid" class="input__label">NID</label>
+                    <input type="text" class="form-control input-style" asp-for="Nid">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Nationality" class="input__label">Nationality</label>
+                    <input type="text" class="form-control input-style" asp-for="Nationality">
+                </div>
+            </div>
+            <input type="hidden" asp-for="doctorID">
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<!-- forms 2 -->
+
+
+
+
+
+<!-- //forms 2 -->
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
