@@ -152,3 +152,6 @@ C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Doctor\
 C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Doctor\Create.cshtml.g.cs
 C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Doctor\EditInformation.cshtml.g.cs
 C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Schedule\Edit.cshtml.g.cs
+C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Patient\Details.cshtml.g.cs
+C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Appointment\Create.cshtml.g.cs
+C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Appointment\Index.cshtml.g.cs

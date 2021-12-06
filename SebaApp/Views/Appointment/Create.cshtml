@@ -1,0 +1,81 @@
+﻿@model SebaApp.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @{ 
+                Random rnd = new Random();
+                int Idvalue = rnd.Next(100000, 999999);
+            }
+
+            <input asp-for="appointID" class="form-control" value="@Idvalue"/>
+
+            <div class="form-group">
+                <label asp-for="AppointmentType" class="control-label"></label>
+
+                <select asp-for="AppointmentType" class="form-control input-style">
+                    <option selected>Choose...</option>
+                    <option value="Virtual">Virtual meeting</option>
+                    <option value="Office">Office Metting</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppoinmentDate" class="control-label"></label>
+                <input asp-for="AppoinmentDate" class="form-control" />
+                <span asp-validation-for="AppoinmentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeSlot" class="control-label"></label>
+                <input asp-for="TimeSlot" class="form-control" />
+                <span asp-validation-for="TimeSlot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="About_Appointment" class="control-label"></label>
+                <input asp-for="About_Appointment" class="form-control" />
+                <span asp-validation-for="About_Appointment" class="text-danger"></span>
+            </div>
+            @{
+                DateTime now = DateTime.Now;
+                string strDate = now.ToString("YYYY-MM-dd");
+            }
+            <div class="form-group">
+                <input asp-for="AppointmentStatus" class="form-control" value="1" hidden />
+            </div>
+            <div class="form-group">
+                <input asp-for="created" class="form-control"/>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="doctorID" class="control-label"></label>
+                <input asp-for="doctorID" class="form-control" value="@ViewBag.doctorid" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="PatienID" class="control-label"></label>
+                <input asp-for="PatienID" class="form-control" value="@ViewBag.patient" />
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -128,7 +128,7 @@
                             else
                             {
 
-                                <a class="btn btn-outline-info " asp-action="EditInformation"  asp-route-id="@Model.doctorID">Edit</a>
+                                <a class="btn btn-outline-info " asp-action="EditInformation" asp-route-id="@Model.doctorID">Edit</a>
 
                             }
 
@@ -278,7 +278,7 @@
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
                                                             <label for="SpecialistIn" class="input__label">SpecialistIn</label>
-                                                            <select id="SpecialistIn" class="form-control input-style" name="SpecialistIn" >
+                                                            <select id="SpecialistIn" class="form-control input-style" name="SpecialistIn">
                                                                 <option value="@ViewBag.SpecialistIn">@ViewBag.SpecialistIn</option>
                                                                 <option value="dentis">dentis </option>
                                                                 <option value="Anesthesiology">Anesthesiology </option>
@@ -314,7 +314,7 @@
                                                     <div class="form-group">
                                                         <label for="OfficeAddress" class="input__label">OfficeAddress</label>
                                                         <input type="text" class="form-control input-style" id="OfficeAddress" name="OfficeAddress"
-                                                              value="@ViewBag.officeAddress">
+                                                               value="@ViewBag.officeAddress">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="MailingAddress" class="input__label">MailingAddress</label>
@@ -557,63 +557,105 @@
                             </div>
                         </div><!-- Modal End-->
 
-                            <div class="container mt-4">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <!--Table-->
-                                        <table class="table table-hover">
-                                            <!--Table head-->
-                                            <thead class="mdb-color darken-3">
-                                                <tr class="text-black-50">
-                                                    <th>#</th>
-                                                    <th>Day</th>
-                                                    <th>Times</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <!--Table head-->
-                                            <!--Table body-->
-                                            @{ int num = 0;
-                                            }
-                                            @if (ViewData["Schdule"] == null)
-                                            {
+                        <div class="container mt-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <!--Table-->
+                                    <table class="table table-hover">
+                                        <!--Table head-->
+                                        <thead class="mdb-color darken-3">
+                                            <tr class="text-black-50">
+                                                <th>#</th>
+                                                <th>Day</th>
+                                                <th>Times</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <!--Table head-->
+                                        <!--Table body-->
+                                        @{ int num = 0;
+                                        }
+                                        @if (ViewData["Schdule"] == null)
+                                        {
 
-                                            }
-                                            else
-                                            {
-                                                <tbody>
-                                                    @foreach (var std in ViewData["Schdule"] as IList<Schedule>)
-                                                    {
-                                                        num = num + 1;
-                                                        <tr>
-                                                            <th scope="row">@num</th>
-                                                            <td>@std.SetDay</td>
-                                                            <td>@std.SetTime</td>
-                                                            <td>
-                                                                @Html.ActionLink("Edit", "Edit", "Schedule", new { id = @std.ScheduleID }, new { }) |
-                                                                @Html.ActionLink("Delete", "Delete", "Schedule", new { id = @std.ScheduleID }, new { })
-                                                            </td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                            }
+                                        }
+                                        else
+                                        {
+                                            <tbody>
+                                                @foreach (var std in ViewData["Schdule"] as IList<Schedule>)
+                                                {
+                                                    num = num + 1;
+                                                    <tr>
+                                                        <th scope="row">@num</th>
+                                                        <td>@std.SetDay</td>
+                                                        <td>@std.SetTime</td>
+                                                        <td>
+                                                            @Html.ActionLink("Edit", "Edit", "Schedule", new { id = @std.ScheduleID }, new { }) |
+                                                            @Html.ActionLink("Delete", "Delete", "Schedule", new { id = @std.ScheduleID }, new { })
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        }
 
-                                            <!--Table body-->
-                                        </table>
-                                        <!--Table-->
-                                    </div>
+                                        <!--Table body-->
+                                    </table>
+                                    <!--Table-->
                                 </div>
-
                             </div>
-                            <!--MDB Tables-->
-                        
+
+                        </div>
+                        <!--MDB Tables-->
+
                     </div>
                 </div>
-            </div>
-
+            </div><!--Schedule Section End-->
 
         </div>
 
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Patient Name</th>
+                                <th scope="col">Appointment Id</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        @if (ViewData["listAppointment"] == null)
+                        {
+
+                        }
+                        else
+                        {
+                    <tbody>
+                        @foreach (var apn in ViewData["listAppointment"] as IList<Appointment>)
+                        {
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>@apn.PatienID</td>
+                            <td>@apn.appointID</td>
+                            <td>@apn.AppoinmentDate</td>
+                            <td>@apn.TimeSlot</td>
+                            <td>
+                                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        }
+                        </tbody>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
 
 
         </div>

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SebaApp.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.appointID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppoinmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeSlot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.About_Appointment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doctor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.appointID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppoinmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeSlot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.About_Appointment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.FirstName) @Html.DisplayFor(modelItem => item.Doctor.LastName)
+            </td>
+            <td>
+                 @Html.DisplayFor(modelItem => item.Patient.FirstName) @Html.DisplayFor(modelItem => item.Patient.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

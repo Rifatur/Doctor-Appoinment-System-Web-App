@@ -45,6 +45,58 @@ namespace SebaApp.Controllers
 
 
 
+        public async Task<IActionResult> Details(int? id)
+        {
+
+            
+            
+            if (id == null || id <= 0)
+            {
+                return BadRequest();
+            }
+            
+
+            var GetPatientdata = await _context.Patients.FirstOrDefaultAsync(e => e.PatienID == id);
+            //Geting doctor List into patient profile
+            var doctors = await _context.Doctors.ToListAsync();
+
+            var PatientAppointment = await _context.Appointments.Where(e => e.PatienID == id).ToListAsync();
+
+            Patient ViewProfileDetails = new Patient();
+            ViewProfileDetails.PatienID = GetPatientdata.PatienID;
+            ViewProfileDetails.FirstName = GetPatientdata.FirstName;
+            ViewProfileDetails.LastName = GetPatientdata.LastName;
+            ViewProfileDetails.Email = GetPatientdata.Email;
+            ViewProfileDetails.Password = GetPatientdata.Password;
+            ViewProfileDetails.mobile = GetPatientdata.mobile;
+            ViewProfileDetails.Token = GetPatientdata.Token;
+            ViewProfileDetails.PatienCard = GetPatientdata.PatienCard;
+            ViewProfileDetails.Status = GetPatientdata.Status;
+
+
+
+
+
+
+            ViewData["doctors"] = doctors;
+
+
+            
+            //Getting Schedule List
+            if (PatientAppointment == null)
+            {
+
+            }
+            else
+            {
+                ViewData["Appoinment"] = PatientAppointment;
+            }
+
+           
+
+            return View(ViewProfileDetails);
+        }
+
 
         public async Task<IActionResult> Delete(int? id)
         {

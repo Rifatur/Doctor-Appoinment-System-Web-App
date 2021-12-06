@@ -104,6 +104,9 @@ namespace SebaApp.Controllers
             var doctorinformation = await _context.DoctorInformation.FirstOrDefaultAsync(i => i.doctorID == id);
             //getting Doctor Schedules
             var doctorschedule = await _context.Schedules.Where(i => i.doctorID == id).ToListAsync();
+            //getting Doctor Appointment
+            var doctorAppointment = await _context.Appointments.Where(i => i.doctorID == id).ToListAsync();
+
 
             ViewBag.infocount = _context.DoctorInformation.Where(i => i.doctorID == id).Count();
 
@@ -152,6 +155,19 @@ namespace SebaApp.Controllers
                 //Doctor Show Schedule
                 ViewData["Schdule"] = doctorschedule;
             }
+            //Getting Schedule List
+            if (doctorAppointment == null)
+            {
+
+            }
+            else
+            {
+                //Doctor Show Appointment
+                ViewData["listAppointment"] = doctorAppointment;
+            }
+
+
+
 
             return View(ViewProfileDetails);
 
