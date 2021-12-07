@@ -48,6 +48,7 @@ namespace SebaApp.Models
         public virtual List<Schedule> Schedules { get; set; }
         public virtual VisitingPrice VisitingPrice { get; set; }
         public virtual List<Appointment> Appointments{ get; set; }
+        public virtual List<Invoice> Invoices { get; set; }
 
 
     }

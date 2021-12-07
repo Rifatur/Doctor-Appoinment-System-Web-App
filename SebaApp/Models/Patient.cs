@@ -50,6 +50,7 @@ namespace SebaApp.Models
         public virtual PatientInformation PatientInformation { get; set; }
         public virtual AccountBalance AccountBalance { get; set; }
         public virtual List<Appointment> Appointments { get; set; }
+        public virtual List<Invoice> Invoice { get; set; }
 
     }
 }

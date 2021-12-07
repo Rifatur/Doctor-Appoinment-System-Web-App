@@ -15,6 +15,8 @@ namespace SebaApp.Data
         {
             // Configure Doctor & DoctorInformation entity
             modelBuilder.Entity<Doctor>().HasOne(a => a.DoctorInformation).WithOne(ad => ad.Doctor).HasForeignKey<DoctorInformation>(d => d.doctorID);
+
+
             modelBuilder.Entity<DoctorImage>().HasOne<Doctor>(s => s.Doctor).WithMany(i => i.DoctorImages).HasForeignKey(f => f.doctorID);
            
             modelBuilder.Entity<Patient>().HasOne(a => a.PatientInformation).WithOne(ad => ad.Patient).HasForeignKey<PatientInformation>(d => d.PatienID);
@@ -43,7 +45,7 @@ namespace SebaApp.Data
         public DbSet<PatientInformation> PatientInformation { get; set; }
         public DbSet<AccountBalance> AccountBalances { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-
+        public DbSet<Invoice> Invoices { get; set; }
 
     }
 }

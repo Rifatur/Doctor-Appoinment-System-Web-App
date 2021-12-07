@@ -25,5 +25,7 @@ namespace SebaApp.Models
         public int PatienID { get; set; }
         public virtual Patient Patient { get; set; }
 
+       
+
     }
 }
