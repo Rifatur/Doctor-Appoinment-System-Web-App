@@ -62,7 +62,18 @@
                 @Html.DisplayFor(modelItem => item.About_Appointment)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AppointmentStatus)
+                @if (item.AppointmentStatus == 1)
+                {
+                    <button type="button" class="btn btn-outline-success ">Pending</button>
+                }
+                else if (item.AppointmentStatus == 1)
+                {
+                    <button type="button" class="btn btn-outline-success ">Accepted</button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-outline-danger ">Appointment Not accepted </button>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.created)

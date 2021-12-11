@@ -34,11 +34,11 @@ namespace SebaApp.Controllers
             return View(appointments);
         }
 
-        public async Task<IActionResult> Create (int? id ,int? patent)
+        public IActionResult Create(int? id , int? patient)
         {
 
             ViewBag.doctorid = id;
-            ViewBag.patient = patent;
+            ViewBag.patient = patient;
              
             return View();
         }

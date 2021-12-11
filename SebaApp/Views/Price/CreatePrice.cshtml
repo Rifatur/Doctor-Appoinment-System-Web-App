@@ -1,0 +1,15 @@
+﻿@model SebaApp.Models.VisitingPrice
+
+@{
+    ViewData["Title"] = "CreatePrice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

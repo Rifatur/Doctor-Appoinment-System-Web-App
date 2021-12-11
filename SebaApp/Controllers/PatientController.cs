@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SebaApp.Data;
 using SebaApp.Models;
@@ -48,9 +49,7 @@ namespace SebaApp.Controllers
         public async Task<IActionResult> Details(int? id)
         {
 
-            
-            
-            if (id == null || id <= 0)
+            if (id == null || id <= 0)//
             {
                 return BadRequest();
             }
@@ -59,8 +58,11 @@ namespace SebaApp.Controllers
             var GetPatientdata = await _context.Patients.FirstOrDefaultAsync(e => e.PatienID == id);
             //Geting doctor List into patient profile
             var doctors = await _context.Doctors.ToListAsync();
-
+            //
             var PatientAppointment = await _context.Appointments.Where(e => e.PatienID == id).ToListAsync();
+            //
+            var getDoctor = await _context.Doctors.ToListAsync();
+            ViewBag.Doctor = new SelectList(getDoctor, "doctorID", "FirstName");
 
             Patient ViewProfileDetails = new Patient();
             ViewProfileDetails.PatienID = GetPatientdata.PatienID;
@@ -74,25 +76,22 @@ namespace SebaApp.Controllers
             ViewProfileDetails.Status = GetPatientdata.Status;
 
 
-
-
-
-
+            //Getting all Doctor List 
             ViewData["doctors"] = doctors;
 
-
-            
-            //Getting Schedule List
+            //Getting Appointment List
             if (PatientAppointment == null)
             {
-
+                // if value is null defult page will show (-_-)
             }
             else
             {
                 ViewData["Appoinment"] = PatientAppointment;
             }
+            //End Appointment
 
-           
+
+
 
             return View(ViewProfileDetails);
         }

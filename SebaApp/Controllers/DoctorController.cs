@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SebaApp.Data;
 using SebaApp.Models;
@@ -107,9 +108,13 @@ namespace SebaApp.Controllers
             //getting Doctor Appointment
             var doctorAppointment = await _context.Appointments.Where(i => i.doctorID == id).ToListAsync();
 
+            var getPatient = await _context.Patients.ToListAsync();
+            ViewBag.Patient = new SelectList(getPatient, "PatienID", "FirstName");
 
             ViewBag.infocount = _context.DoctorInformation.Where(i => i.doctorID == id).Count();
-
+            //getting Doctor Price Info
+            var visitingCost = await _context.visitingPrices.FirstOrDefaultAsync(i => i.doctorID == id);
+            ViewBag.PriceCount = _context.visitingPrices.Where(p => p.doctorID == id).Count();
 
             Doctor ViewProfileDetails = new Doctor();
 
@@ -166,7 +171,12 @@ namespace SebaApp.Controllers
                 ViewData["listAppointment"] = doctorAppointment;
             }
 
-
+            //Geting Doctor Visiting price  
+            if(visitingCost == null) { }
+            else
+            {
+                ViewBag.price = visitingCost.FirstVisit;
+            }
 
 
             return View(ViewProfileDetails);
@@ -251,7 +261,25 @@ namespace SebaApp.Controllers
             return RedirectToAction("Profile", "Doctor", new { @id = schedule.doctorID });
         }
 
+        //Add VisitingPrice
+        [HttpPost]
+        public IActionResult CreatePrice(VisitingPrice Price )
+        {
 
+
+            _context.visitingPrices.Add(new VisitingPrice() {
+                
+                FirstVisit = Price.FirstVisit,
+                SecondVisit = Price.SecondVisit,
+                status = Price.status,
+                doctorID = Price.doctorID
+
+            });
+            _context.SaveChanges();
+
+            TempData["SMessage"]= "Price Adeed Successfully ..!";
+            return RedirectToAction("Profile", "Doctor", new { @id = Price.doctorID });
+        }
 
     }
 

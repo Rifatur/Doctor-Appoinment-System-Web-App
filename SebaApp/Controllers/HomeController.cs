@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SebaApp.Data;
 using SebaApp.Models;
 using System;
 using System.Collections.Generic;
@@ -11,15 +13,20 @@ namespace SebaApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var doctors = await _context.Doctors.ToListAsync();
+            ViewBag.Dcount = _context.Doctors.Count();
+            ViewBag.Pcount = _context.Patients.Count();
+            ViewBag.Aptcount = _context.Appointments.Count();
+
             return View();
         }
 
