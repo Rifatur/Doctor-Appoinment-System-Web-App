@@ -1,0 +1,63 @@
+﻿@model SebaApp.Models.Invoice
+
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Payment</h1>
+
+<h4>Invoice</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Payment">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="feeType" class="control-label"></label>
+                <input asp-for="feeType" class="form-control" />
+                <span asp-validation-for="feeType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="paymentStatus" class="control-label"></label>
+                <input asp-for="paymentStatus" class="form-control" />
+                <span asp-validation-for="paymentStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayableTotal" class="control-label"></label>
+                <input asp-for="PayableTotal" class="form-control" value="@ViewBag.cost" />
+                <span asp-validation-for="PayableTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DuoAmount" class="control-label"></label>
+                <input asp-for="DuoAmount" class="form-control" />
+                <span asp-validation-for="DuoAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="appointID" class="control-label"></label>
+                <input asp-for="appointID" class="form-control" value="@ViewBag.apnID"/>
+                <span asp-validation-for="appointID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="doctorID" class="control-label"></label>
+                <input asp-for="doctorID" class="form-control" value="@ViewBag.doctorId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PatienID" class="control-label"></label>
+                <input asp-for="PatienID" class="form-control" value="@ViewBag.patientId" />
+                <span asp-validation-for="PatienID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

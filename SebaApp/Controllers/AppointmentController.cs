@@ -39,7 +39,10 @@ namespace SebaApp.Controllers
 
             ViewBag.doctorid = id;
             ViewBag.patient = patient;
-             
+
+            Random rnd = new Random();
+            ViewBag.Idvalue = rnd.Next(100000, 999999);
+
             return View();
         }
 
@@ -54,9 +57,27 @@ namespace SebaApp.Controllers
            
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Details", "Patient", new { @id = appointment.PatienID });
+
+            return RedirectToAction("Payment", "Appointment", new { @id = appointment.appointID });
         }
 
+        public IActionResult Payment(int? id)
+        {
+
+            var AppointId = id ;
+            ViewBag.apnID = AppointId;
+            var Getappointments = _context.Appointments.Where(e=>e.appointID == AppointId).FirstOrDefault(); 
+
+
+            ViewBag.patientId = Getappointments.doctorID;
+            ViewBag.doctorId = Getappointments.PatienID;
+
+            var getPrice = _context.visitingPrices.Where(p => p.doctorID == Getappointments.doctorID).FirstOrDefault();
+            ViewBag.cost = getPrice.FirstVisit;
+
+
+            return View();
+        }
 
     }
 }

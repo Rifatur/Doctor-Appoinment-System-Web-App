@@ -13,12 +13,8 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @{ 
-                Random rnd = new Random();
-                int Idvalue = rnd.Next(100000, 999999);
-            }
 
-            <input asp-for="appointID" class="form-control" value="@Idvalue"/>
+            <input asp-for="appointID" class="form-control" value="@ViewBag.Idvalue"/>
 
             <div class="form-group">
                 <label asp-for="AppointmentType" class="control-label"></label>
