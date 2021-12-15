@@ -69,15 +69,60 @@ namespace SebaApp.Controllers
             var Getappointments = _context.Appointments.Where(e=>e.appointID == AppointId).FirstOrDefault(); 
 
 
-            ViewBag.patientId = Getappointments.doctorID;
-            ViewBag.doctorId = Getappointments.PatienID;
+            ViewBag.doctorId = Getappointments.doctorID; 
+            ViewBag.patientId = Getappointments.PatienID;
 
             var getPrice = _context.visitingPrices.Where(p => p.doctorID == Getappointments.doctorID).FirstOrDefault();
             ViewBag.cost = getPrice.FirstVisit;
+            ViewBag.Total = getPrice.FirstVisit ;
 
+            //Get Patient Info
+            var PatientInfo = _context.Patients.Where(x => x.PatienID == Getappointments.PatienID).FirstOrDefault();
+
+            ViewBag.FName = PatientInfo.FirstName;
+            ViewBag.LName = PatientInfo.LastName;
+            ViewBag.Email = PatientInfo.Email;
+            ViewBag.Phone = PatientInfo.mobile;
+            //Get Doctor Info
+            var DoctorInfo = _context.Doctors.Where(y => y.doctorID == Getappointments.doctorID).FirstOrDefault();
+            ViewBag.dFName = DoctorInfo.FirstName;
+            ViewBag.dLName = DoctorInfo.LastName;
+            //getting Doctor Information
+            var doctorinfo =  _context.DoctorInformation.Where(e => e.doctorID == Getappointments.doctorID).FirstOrDefault(); ;
+            if (doctorinfo == null)
+            {}
+            else
+            {
+                //Doctor personal Information
+                ViewBag.SpecialistIn = doctorinfo.SpecialistIn;
+            }
 
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Payment(Invoice invoice)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(invoice);
+            }
+            int query = _context.Invoices.Where(x => x.appointID == invoice.appointID ).Count();
+
+            if(query < 1)
+            {
+                _context.Invoices.Add(invoice);
+                await _context.SaveChangesAsync();
+
+            }
+            else
+            {
+                TempData["ErrMessage"] = " Invoice Already Created ..!";
+                return RedirectToAction("Payment", "Appointment", new { @id = invoice.appointID });
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
 
     }
 }
