@@ -96,6 +96,7 @@ namespace SebaApp.Controllers
                 //Doctor personal Information
                 ViewBag.SpecialistIn = doctorinfo.SpecialistIn;
             }
+            ViewBag.INvoice = _context.Invoices.Where(x => x.appointID == AppointId).Count();
 
             return View();
         }
@@ -109,6 +110,8 @@ namespace SebaApp.Controllers
             }
             int query = _context.Invoices.Where(x => x.appointID == invoice.appointID ).Count();
 
+            
+
             if(query < 1)
             {
                 _context.Invoices.Add(invoice);
@@ -121,6 +124,12 @@ namespace SebaApp.Controllers
                 return RedirectToAction("Payment", "Appointment", new { @id = invoice.appointID });
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Invoice(int? id)
+        {
+            
+            return View();
         }
 
 

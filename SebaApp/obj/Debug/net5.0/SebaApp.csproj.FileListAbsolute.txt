@@ -157,3 +157,4 @@ C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Appoint
 C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Appointment\Index.cshtml.g.cs
 C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Price\CreatePrice.cshtml.g.cs
 C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Appointment\Payment.cshtml.g.cs
+C:\Users\lovet\source\repos\SebaApp\SebaApp\obj\Debug\net5.0\Razor\Views\Appointment\Invoice.cshtml.g.cs

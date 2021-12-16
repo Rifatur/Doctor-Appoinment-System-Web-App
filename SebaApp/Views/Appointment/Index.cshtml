@@ -89,7 +89,16 @@
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
 
-                <a asp-action="Payment" asp-route-id="@item.appointID">Payment</a>
+                @if (@ViewBag.INvoice > 0)
+                {
+                    <a asp-action="Invoice" asp-route-id="@item.appointID">invoice</a>
+                }
+                else
+                {
+                    <a asp-action="Payment" asp-route-id="@item.appointID">Payment</a>
+                }
+
+
             </td>
         </tr>
 }
