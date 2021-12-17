@@ -31,6 +31,7 @@ namespace SebaApp.Controllers
             var getPatient = await _context.Patients.ToListAsync();
             ViewBag.Patient = new SelectList(getPatient, "PatienID", "email");
 
+
             return View(appointments);
         }
 
@@ -96,9 +97,10 @@ namespace SebaApp.Controllers
                 //Doctor personal Information
                 ViewBag.SpecialistIn = doctorinfo.SpecialistIn;
             }
-            ViewBag.INvoice = _context.Invoices.Where(x => x.appointID == AppointId).Count();
+            int query = _context.Invoices.Where(x => x.appointID == AppointId).Count();
+            ViewBag.invoice = query;
 
-            return View();
+                return View();
         }
 
         [HttpPost]
@@ -128,8 +130,28 @@ namespace SebaApp.Controllers
 
         public IActionResult Invoice(int? id)
         {
-            
+            ViewBag.Invoice = id;
+
+            var Getappoint = _context.Appointments.Where(e => e.appointID == id).FirstOrDefault();
+
+
+            ViewBag.doctorId = Getappoint.doctorID;
+            ViewBag.patientId = Getappoint.PatienID;
+
+            //Get Patient Info
+            var PatientInfo = _context.Patients.Where(x => x.PatienID == Getappoint.PatienID).FirstOrDefault();
+
+            ViewBag.FName = PatientInfo.FirstName;
+            ViewBag.LName = PatientInfo.LastName;
+            ViewBag.Email = PatientInfo.Email;
+            ViewBag.Phone = PatientInfo.mobile;
+
+
+
+
+
             return View();
+
         }
 
 

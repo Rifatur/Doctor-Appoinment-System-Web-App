@@ -96,7 +96,17 @@
                 <input asp-for="PatienID" class="form-control" value="@ViewBag.patientId" hidden />
                 <input asp-for="DuoAmount" class="form-control" value="0" hidden />
                 <hr class="mb-4">
-                <input type="submit" value="Continue to checkout" class="btn btn-primary btn-lg btn-block" />
+
+                @if (ViewBag.invoice > 0)
+                {
+                    <a asp-action="Invoice" class="btn btn-primary btn-lg btn-block" asp-route-id="@ViewBag.apnID">Cheack Invoice</a>
+
+                }
+                else
+                {
+                    <input type="submit" value="Continue to checkout" class="btn btn-primary btn-lg btn-block" />
+                }
+
 
 
             </div>

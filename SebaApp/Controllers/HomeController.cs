@@ -27,6 +27,16 @@ namespace SebaApp.Controllers
             ViewBag.Pcount = _context.Patients.Count();
             ViewBag.Aptcount = _context.Appointments.Count();
 
+            //Geting Total Earning
+            var Getinvoice = await _context.Invoices.ToListAsync();
+            double sum = 0;
+            foreach(var item in Getinvoice)
+            {
+                sum += item.PayableTotal;
+            }
+
+            ViewBag.TotalEarn = sum;
+
             return View();
         }
 
